@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+
 namespace LectureOneToThree{
 
     template<typename T>
@@ -33,13 +34,20 @@ namespace LectureOneToThree{
 
     template<typename T>
     T* myFind(T* first, T* last, const T& value){
-        std::vector<int>* v = new std::vector<int>(first, last);
+        std::vector<int>* _value = new std::vector<int>(first, last);
         
-        for (size_t i = 0; i < v->size(); i++)
+        std::cout << std::endl;
+        
+        for (size_t i = 0; i < _value->size(); i++)
         {
-            if((*v)[i] == value){
-                last;
+            std::cout << "comparing values: " << (*_value)[i] << " to: " << value << std::endl;
+            if((*_value)[i] == value)
+            {
+                std::cout << "Equal!" << std::endl;
+                return &(*_value)[i];
             }
+            
+            std::cout << "Not Equal!" << std::endl;
         }
         return last;
     }
