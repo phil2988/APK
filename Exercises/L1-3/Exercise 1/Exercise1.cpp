@@ -36,7 +36,6 @@ public:
             this->array_[i] = *d;
         }
         
-
         return *this;
     }
 
