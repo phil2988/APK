@@ -1,19 +1,27 @@
 #include <iostream>
 #include <vector>
 
-template<typename T>
+template<typename T, std::size_t capacity = 5>
 
 class MyArray
 {   
-    T* array_;
+    T array_[capacity];
 public:
     MyArray(){
-        array_ = new T[10];
+        for (size_t i = 0; i < capacity; i++)
+        {
+            array_[i] = 0;
+        }
+        
+        std::cout << "Array initialized with values: ";
+        for (size_t i = 0; i < capacity; i++)
+        {
+            std::cout << array_[i] << ", ";
+        };
+        std::cout << std::endl;
     };
-    MyArray(size_t size){
-        array_ = new T[size];
-    };
-    ~MyArray(){ delete(array_); };
+
+    ~MyArray(){ };
 
     void fill(const T&);
 
@@ -22,7 +30,7 @@ public:
     };
 
     T* end(){
-        return &array_[sizeof(array_)];
+        return &array_[capacity - 1];
     };
 
     T& operator[] (int i){
@@ -30,17 +38,18 @@ public:
     };
 
     MyArray<double>& operator= (MyArray<int> intArray){
-        for (size_t i = 0; i < sizeof(intArray); i++)
+        for (size_t i = 0; i < capacity - 1; i++)
         {
-            double* d = new double(intArray[i]);
-            this->array_[i] = *d;
+            double d = intArray[i];
+            std::cout <<"int value is: " << intArray[i] << ", new double value is: " << d << std::endl;
+            this->array_[i] = d;
         }
         
         return *this;
     }
 
     size_t size(){
-        return sizeof(array_);
+        return capacity;
     };
 };
 
