@@ -1,0 +1,5 @@
+from msilib.schema import Environment
+
+env = Environment()
+
+env.Program('algo', ["algo.cpp"])
