@@ -14,6 +14,7 @@
 #include <string>
 
 #include <sstream>
+#include <string.h>
 
 #define PRODUCT_DB_FILE		"product.db"
 
@@ -161,13 +162,37 @@ void productDBWrite(const ProductList& pl, const std::string& fileName)
 }
 
 
+bool hasMoreThanTenSold(Product p){
+  return p.sold() > 10;
+}
+
 /**
  * Print poorly selling products
  */
 void printPoorlySellingProducts(const ProductList& pl)
 {
-}
+  std::vector<std::string> outputVector;
+  
+  outputVector.push_back("##################################################");
+  outputVector.push_back("Printing out products with less than 10 sold...");
+  outputVector.push_back("----------------------------");
 
+  std::vector<Product> rpl(pl.capacity());
+  
+  std::remove_copy_if(pl.begin(), pl.end(), rpl.begin(), hasMoreThanTenSold);
+
+  for(ProductList::const_iterator iter = rpl.begin(); iter != rpl.end(); ++iter)
+  {
+    // Filters off undefined products
+    std::string s;
+    if(iter.base()->name().compare(s))
+      outputVector << *iter;
+  }  
+
+  outputVector.push_back("##################################################");
+  std::ostream_iterator<std::string> os(std::cout, "\n");
+  std::copy(outputVector.begin(), outputVector.end(), os);
+}
 
 /**
  * Set a discount on all products - Using for_each()
