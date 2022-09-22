@@ -125,21 +125,39 @@ void printAll(const ProductList& pl)
   std::copy(outputVector.begin(), outputVector.end(), os);
 }
 
-
-
 /**
    Add item
 */
 void addItem(ProductList& pl)
 {
-}
+  std::string input;
+  std::cout << "Enter name of product:" << "\n";
+  std::cin >> input;
+  std::string pName = input;
+  std::cout << "Name of product is: " << pName << "\n";
 
+  std::cout << "Enter price of product:" << "\n";
+  std::cin >>  input;
+  float pPrice = std::stof(input);
+  std::cout << "Name of product is: " << pPrice << "\n";
+
+  std::cout << "Enter amount sold :" << "\n";
+  std::cin >>  input;
+  int pSold = std::stoi(input);
+  std::cout << "Amount sold: " << pSold << "\n";
+
+  pl.push_back(Product(pName, pPrice, pSold));
+}
 
 /**
    Write data to db file
 */
 void productDBWrite(const ProductList& pl, const std::string& fileName)
 {
+  std::ofstream pFile( fileName.c_str() );
+  std::ostream_iterator<Product> it(pFile, "\n");
+
+  std::copy(pl.begin(), pl.end(), it);
 }
 
 
