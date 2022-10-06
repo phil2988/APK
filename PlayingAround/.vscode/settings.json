@@ -57,6 +57,13 @@
         "random": "cpp",
         "string_view": "cpp",
         "numbers": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "future": "cpp",
+        "condition_variable": "cpp",
+        "ratio": "cpp",
+        "mutex": "cpp",
+        "semaphore": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp"
     }
 }
