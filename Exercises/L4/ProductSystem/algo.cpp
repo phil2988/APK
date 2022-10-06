@@ -161,7 +161,6 @@ void productDBWrite(const ProductList& pl, const std::string& fileName)
   std::copy(pl.begin(), pl.end(), it);
 }
 
-
 bool hasMoreThanTenSold(Product p){
   return p.sold() > 10;
 }
@@ -199,8 +198,10 @@ void printPoorlySellingProducts(const ProductList& pl)
  */
 void addDiscountUsingForEach(ProductList& pl)
 {
+  std::for_each(pl.begin(), pl.end(), [](Product& p) -> void {
+    p.setPrice(p.price()/100*90);
+  });
 }
-
 
 /**
  * Set a discount on all products - Using transform()
